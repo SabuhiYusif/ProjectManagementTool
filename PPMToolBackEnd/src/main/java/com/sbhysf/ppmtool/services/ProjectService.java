@@ -5,4 +5,5 @@ import com.sbhysf.ppmtool.domain.Project;
 public interface ProjectService {
 
     Project saveOrUpdateProject(Project project);
+    Project findProjectByProjectIdentifier(String projectIdentifier);
 }

@@ -19,7 +19,18 @@ public class ProjectServiceImpl implements ProjectService {
             project.setProjectIdentifier(project.getProjectIdentifier().toUpperCase());
             return projectRepository.save(project);
         }catch (Exception e){
-            throw new ProjectIdException("Project Id " + project.getProjectIdentifier().toUpperCase() + " not found");
+            throw new ProjectIdException("Project Id " + project.getProjectIdentifier().toUpperCase() + " already exists");
         }
     }
+
+    @Override
+    public Project findProjectByProjectIdentifier(String projectIdentifier) {
+        Project project = projectRepository.findByProjectIdentifier(projectIdentifier.toUpperCase());
+        if (project == null)
+            throw new ProjectIdException("Project Id " + projectIdentifier.toUpperCase() + " not found");
+
+        return projectRepository.findByProjectIdentifier(projectIdentifier.toUpperCase());
+    }
+
+
 }
